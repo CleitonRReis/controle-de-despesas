@@ -6,12 +6,16 @@ const form = document.querySelector('#form');
 const inputTransactionName = document.querySelector('#text');
 const inputTransactonAmount = document.querySelector('#amount');
 
-let transactions = [    
-    { id: 1, name: 'Salário', amount: 1600 },
-    { id: 2, name: 'Cartão C6 Banck', amount: -50 },
-    { id: 5, name: 'Cartão Nubank', amount: -10 },
-    { id: 6, name: 'Flash (VR)', amount: 1000 }
-];
+// let transactions = [    
+//     { id: 1, name: 'Salário', amount: 1600 },
+//     { id: 2, name: 'Cartão C6 Banck', amount: -50 },
+//     { id: 5, name: 'Cartão Nubank', amount: -10 },
+//     { id: 6, name: 'Flash (VR)', amount: 1000 }
+// ];
+
+const localStorageTransactions = JSON.parse(localStorage.getItem('transactions'));
+
+let transactions = localStorage.getItem('transactions') !== null ? localStorageTransactions : [];
 
 const removeTransaction = ID => {
     
