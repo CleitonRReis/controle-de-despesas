@@ -6,7 +6,7 @@ const form = document.querySelector('#form');
 const inputTransactionName = document.querySelector('#text');
 const inputTransactonAmount = document.querySelector('#amount');
 
-console.log( inputTransactionName, inputTransactonAmount );
+// console.log( inputTransactionName, inputTransactonAmount );
 
 const transactions = [    
     { id: 1, name: 'Salário', amount: 1600 },
@@ -57,6 +57,8 @@ const updateBalanceValues = () => {
 // Executa o preenchimento das transações no DOM quando a página for carregada (Adiciona as transações no DOM).
 
 const init = () => {
+
+    transactionUl.innerHTML = '';
     
     transactions.forEach(addTransactions);
     updateBalanceValues();
@@ -64,6 +66,8 @@ const init = () => {
 }
 
 init();
+
+const generateID = () => Math.round(Math.random() * 1000);
 
 form.addEventListener('submit', event => {
 
@@ -77,6 +81,17 @@ form.addEventListener('submit', event => {
         return;
     };
 
-    const transaction = { id: 1, name: 'Salário', amount: transactionAmount };
+    const transaction = { 
+        id: generateID(), 
+        name: transactionName, 
+        amount: Number(transactionAmount)
+    };
+
+    transactions.push(transaction);
+
+    init();
+
+    inputTransactionName.value = '';
+    inputTransactonAmount.value = '';
 
 });
