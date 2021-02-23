@@ -6,14 +6,20 @@ const form = document.querySelector('#form');
 const inputTransactionName = document.querySelector('#text');
 const inputTransactonAmount = document.querySelector('#amount');
 
-// console.log( inputTransactionName, inputTransactonAmount );
-
-const transactions = [    
+let transactions = [    
     { id: 1, name: 'Salário', amount: 1600 },
     { id: 2, name: 'Cartão C6 Banck', amount: -50 },
     { id: 5, name: 'Cartão Nubank', amount: -10 },
     { id: 6, name: 'Flash (VR)', amount: 1000 }
 ];
+
+const removeTransaction = ID => {
+    
+    transactions = transactions.filter(transaction => transaction.id !== ID);
+
+    init();
+
+}
 
 const addTransactions = transaction => {
 
@@ -24,7 +30,9 @@ const addTransactions = transaction => {
 
     li.classList.add(CSSClass);
     li.innerHTML = `
-        ${ transaction.name } <span> ${ operator } R$ ${ amountWithoutOperator }</span><button class="delete-btn">x</button>
+        ${ transaction.name } 
+        <span> ${ operator } R$ ${ amountWithoutOperator }</span>
+        <button class="delete-btn" onClick="removeTransaction(${transaction.id})">x</button>
     `
 
     transactionUl.prepend(li);
