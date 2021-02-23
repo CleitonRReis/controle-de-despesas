@@ -2,6 +2,11 @@ const transactionUl = document.querySelector('#transactions');
 const incomeDisplay = document.querySelector('#money-plus');
 const expenseDisplay = document.querySelector('#money-minus');
 const balanceDisplay = document.querySelector('#balance');
+const form = document.querySelector('#form');
+const inputTransactionName = document.querySelector('#text');
+const inputTransactonAmount = document.querySelector('#amount');
+
+console.log( inputTransactionName, inputTransactonAmount );
 
 const transactions = [    
     { id: 1, name: 'Salário', amount: 1600 },
@@ -59,3 +64,19 @@ const init = () => {
 }
 
 init();
+
+form.addEventListener('submit', event => {
+
+    event.preventDefault();
+
+    const transactionName = inputTransactionName.value.trim();
+    const transactionAmount = inputTransactonAmount.value.trim();
+
+    if(transactionName === '' || transactionAmount === '') {
+        alert('Por favor, preencha o nome e valor da transação!');
+        return;
+    };
+
+    const transaction = { id: 1, name: 'Salário', amount: transactionAmount };
+
+});
