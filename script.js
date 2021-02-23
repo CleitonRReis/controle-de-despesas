@@ -6,13 +6,6 @@ const form = document.querySelector('#form');
 const inputTransactionName = document.querySelector('#text');
 const inputTransactonAmount = document.querySelector('#amount');
 
-// let transactions = [    
-//     { id: 1, name: 'Salário', amount: 1600 },
-//     { id: 2, name: 'Cartão C6 Banck', amount: -50 },
-//     { id: 5, name: 'Cartão Nubank', amount: -10 },
-//     { id: 6, name: 'Flash (VR)', amount: 1000 }
-// ];
-
 const localStorageTransactions = JSON.parse(localStorage.getItem('transactions'));
 
 let transactions = localStorage.getItem('transactions') !== null ? localStorageTransactions : [];
@@ -20,6 +13,8 @@ let transactions = localStorage.getItem('transactions') !== null ? localStorageT
 const removeTransaction = ID => {
     
     transactions = transactions.filter(transaction => transaction.id !== ID);
+
+    updateLocalStorage();
 
     init();
 
@@ -79,6 +74,12 @@ const init = () => {
 
 init();
 
+const updateLocalStorage = () => {
+
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+
+};
+
 const generateID = () => Math.round(Math.random() * 1000);
 
 form.addEventListener('submit', event => {
@@ -102,6 +103,7 @@ form.addEventListener('submit', event => {
     transactions.push(transaction);
 
     init();
+    updateLocalStorage();
 
     inputTransactionName.value = '';
     inputTransactonAmount.value = '';
